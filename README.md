@@ -1,4 +1,4 @@
-server-auto v3.
+# server-auto v3.
 
     Устанавливает все зависимости (Docker, Java 17)
 
