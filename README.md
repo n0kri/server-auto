@@ -24,27 +24,31 @@
 
   ## установка
 
-вот что нужно сделать для установки скрипта на чистый сервер Ubuntu/Debian
+_вот что нужно сделать для установки скрипта на чистый сервер Ubuntu/Debian_
 
-обновить систему командой sudo apt install -y wget curl
+### обновить систему командой: 
+sudo apt install -y wget curl
 
-Скачайте скрипт: wget https://github.com/n0kri/server-auto.git -O setup-server.sh
+### Скачайте скрипт: 
+wget https://github.com/n0kri/server-auto.git -O setup-server.sh
 
-Дайте права на выполнение: chmod +x setup-server.sh
+### Дайте права на выполнение: 
+chmod +x setup-server.sh
 
-Запустите установку: sudo ./setup-server.sh
+### Запустите установку: 
+sudo ./setup-server.sh
 
-или так: sudo apt update && sudo apt install -y wget && wget https://github.com/n0kri/server-auto.git -O setup-server.sh && chmod +x setup-server.sh && ./setup-server.sh
+*или так:* sudo apt update && sudo apt install -y wget && wget https://github.com/n0kri/server-auto.git -O setup-server.sh && chmod +x setup-server.sh && ./setup-server.sh
 
   ## Где найти файлы после установки?
 
-Все файлы будут в папке:
+### Все файлы будут в папке:
 
 ~/minecraft-server/
 
   ## Управление сервером
 
-Команды:
+### Команды:
 
 ./manage.sh start    # Запустить сервер
 ./manage.sh stop     # Остановить
@@ -53,26 +57,27 @@
 
   ## Подключение игроков
 
-узнайте ip сервера командой: curl ifconfig.me
+### узнайте ip сервера командой:
+curl ifconfig.me
 
-Игроки подключаются по адресу:
-ваш-ip:25565
+*Игроки подключаются по адресу:*
+_ваш-ip:25565_
 
   ## Дополнительные настройки
 
-Как изменить параметры:
+### Как изменить параметры:
 
-редактируйте файлы 
+редактируйте файлы
 
 nano ~/minecraft-server/server.properties   Основные настройки
 nano ~/minecraft-server/paper.yml        Оптимизация Paper
 
-Перезапустите сервер:
+### Перезапустите сервер:
 
 ./manage.sh restart
 
   ## Важные параметры:
-  можно изменять
+  ### можно изменять
   
 server.properties
 view-distance=6             # Дистанция загрузки чанков
@@ -81,18 +86,18 @@ difficulty=normal           # Сложность
 
   ## Обновление сервера
 
-Остановите сервер:
+### Остановите сервер:
 
 ./manage.sh stop
 
-Скачайте новую версию PaperMC:
+### Скачайте новую версию PaperMC:
 
 wget (ссылка на скачивание ядра)
 
-Запустите:
+### Запустите:
 
 ./manage.sh start
 
-Для мониторинга используйте:
+### Для мониторинга используйте:
 
 docker stats minecraft-server
