@@ -1,20 +1,97 @@
-server-auto v2
-    Автоматически создаст все необходимые файлы и директории
+server-auto v3.
 
-    Установит все зависимости
+    Устанавливает все зависимости (Docker, Java 17)
 
-    Скачает PaperMC 1.21.4
+    Создает структуру папок
 
-    Настроит Docker-окружение
+    Настраивает Docker-окружение
 
-    Применит оптимизации из нашего диалога
+    Скачивает PaperMC 1.21.4
 
-    Установит флаги Aikar
+    Настраивает оптимизированный сервер
 
-    Настроит RCON для удаленного управления
-
-    Создаст систему управления сервером
+    Запускает сервер в Docker-контейнере
     
-1.для запуска нужно иметь свежую версию unbuty 
-2. надо перейти в директорию и сделать файл исполняемым командой chmod +x setup-server.sh
-3.запуск скрипта ./setup-server.sh
+    Удален RCON и его настройки
+
+    Удален цикл авто-перезапуска в start.sh
+
+    Упрощен manage.sh (удалена команда backup)
+
+    Добавлен явный enable-rcon=false в server.properties
+
+этот скрипт предназначен для установки на vds/vps, он был сделан на Ubuntu 22.04 и был протестирован на 2v cpu и 4gb ram.
+
+вот что нужно сделать для его установки на чистый сервер Ubuntu/Debian
+
+  обновить систему командой sudo apt install -y wget curl
+
+Скачайте скрипт: wget https://github.com/n0kri/server-auto.git -O setup-server.sh
+
+Дайте права на выполнение: chmod +x setup-server.sh
+
+Запустите установку: sudo ./setup-server.sh
+
+или так: sudo apt update && sudo apt install -y wget && wget https://github.com/n0kri/server-auto.git -O setup-server.sh && chmod +x setup-server.sh && ./setup-server.sh
+
+ Где найти файлы после установки?
+
+Все файлы будут в папке:
+
+~/minecraft-server/
+
+Управление сервером
+
+Команды:
+
+./manage.sh start    # Запустить сервер
+./manage.sh stop     # Остановить
+./manage.sh restart  # Перезапустить
+./manage.sh console  # Открыть консоль
+
+Подключение игроков
+
+узнайте ip сервера командой: curl ifconfig.me
+
+Игроки подключаются по адресу:
+ваш-ip:25565
+
+Дополнительные настройки
+
+Как изменить параметры:
+
+редактируйте файлы 
+
+nano ~/minecraft-server/server.properties   Основные настройки
+nano ~/minecraft-server/paper.yml        Оптимизация Paper
+
+Перезапустите сервер:
+
+./manage.sh restart
+
+Важные параметры:
+
+properties
+
+# server.properties
+view-distance=6             # Дистанция загрузки чанков
+max-players=20              # Лимит игроков
+difficulty=normal           # Сложность
+
+ Обновление сервера
+
+Остановите сервер:
+
+./manage.sh stop
+
+Скачайте новую версию PaperMC:
+
+wget (ссылка на скачивание ядра)
+
+Запустите:
+
+./manage.sh start
+
+Для мониторинга используйте:
+
+docker stats minecraft-server
