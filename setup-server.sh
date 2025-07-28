@@ -5,21 +5,23 @@ cat > setup-server.sh << 'EOF'
 sudo apt update && sudo apt upgrade -y
 
 # 2. Установка необходимых компонентов
-sudo apt install -y git docker.io openjdk-17-jdk nano
+sudo apt install -y git && sudo apt install -y docker.io && sudo apt install -y openjdk-17-jdk && sudo apt install -y nano && sudo apt install -y htop
 
 # 3. Включение и запуск Docker
 sudo systemctl enable --now docker
 
-# 4. Создание рабочей директории
+# 4. Создание рабочей директории и установка необходимых компонетнов
 mkdir minecraft-server
 cd minecraft-server
+
+sudo apt install -y docker.io && sudo apt install -y openjdk-17-jdk && sudo apt install -y nano && sudo apt install -y htop
 
 # 5. Создание Dockerfile
 cat > Dockerfile <<EOL
 FROM openjdk:17-jdk
 
 # Установка необходимых утилит
-RUN apt-get update && apt-get install -y nano
+RUN apt-get update 
 
 # Создание директории для сервера
 RUN mkdir /app
@@ -71,26 +73,13 @@ cat > start.sh <<'EOL'
 # Оптимальные флаги Aikar для Java 17+
 JVM_FLAGS="-Xms3G -Xmx3G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
 
-# Автоперезапуск при падении
-while true; do
-  echo "Starting Minecraft server..."
-  java ${JVM_FLAGS} -jar paper.jar nogui
-  
-  # Проверка кода выхода для плановой остановки
-  if [ $? -eq 0 ]; then
-    echo "Server stopped intentionally."
-    exit 0
-  fi
-  
-  echo "Server crashed! Restarting in 10 seconds..."
-  sleep 10
 done
 EOL
 
 # 10. Настройка server.properties
 cat > server.properties <<EOL
 #Minecraft server properties
-spawn-protection=16
+spawn-protection=0
 max-tick-time=30000
 server-port=25565
 server-ip=
