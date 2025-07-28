@@ -22,9 +22,11 @@ server-auto v3.
 
 этот скрипт предназначен для установки на vds/vps, он был сделан на Ubuntu 22.04 и был протестирован на 2v cpu и 4gb ram.
 
+#установка
+
 вот что нужно сделать для его установки на чистый сервер Ubuntu/Debian
 
-  обновить систему командой sudo apt install -y wget curl
+обновить систему командой sudo apt install -y wget curl
 
 Скачайте скрипт: wget https://github.com/n0kri/server-auto.git -O setup-server.sh
 
@@ -34,13 +36,13 @@ server-auto v3.
 
 или так: sudo apt update && sudo apt install -y wget && wget https://github.com/n0kri/server-auto.git -O setup-server.sh && chmod +x setup-server.sh && ./setup-server.sh
 
- Где найти файлы после установки?
+ #Где найти файлы после установки?
 
 Все файлы будут в папке:
 
 ~/minecraft-server/
 
-Управление сервером
+#Управление сервером
 
 Команды:
 
@@ -49,14 +51,14 @@ server-auto v3.
 ./manage.sh restart  # Перезапустить
 ./manage.sh console  # Открыть консоль
 
-Подключение игроков
+#Подключение игроков
 
 узнайте ip сервера командой: curl ifconfig.me
 
 Игроки подключаются по адресу:
 ваш-ip:25565
 
-Дополнительные настройки
+#Дополнительные настройки
 
 Как изменить параметры:
 
@@ -69,16 +71,13 @@ nano ~/minecraft-server/paper.yml        Оптимизация Paper
 
 ./manage.sh restart
 
-Важные параметры:
-
-properties
-
-# server.properties
+#Важные параметры:
+server.properties
 view-distance=6             # Дистанция загрузки чанков
 max-players=20              # Лимит игроков
 difficulty=normal           # Сложность
 
- Обновление сервера
+#Обновление сервера
 
 Остановите сервер:
 
