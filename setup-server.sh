@@ -5,7 +5,7 @@ cat > setup-server.sh << 'EOF'
 sudo apt update && sudo apt upgrade -y
 
 # 2. Установка необходимых компонентов
-sudo apt install -y git docker.io openjdk-17-jdk nano
+sudo apt install -y git && sudo apt install -y docker.io && sudo apt install -y openjdk-17-jdk && sudo apt install -y nano
 
 # 3. Включение и запуск Docker
 sudo systemctl enable --now docker
